@@ -39,7 +39,16 @@ class EffectViewController: UIViewController {
   @IBOutlet weak var effectImage: UIImageView!
   @IBAction func effectButtonAction(_ sender: Any) {
     // フィルター名を指定
-    let filterName = "CIPhotoEffectMono"
+    let filterName = filterArray[filterSelectNumber]
+    
+    // 次の選択するエフェクト添字に更新
+    filterSelectNumber += 1
+    
+    // 添字が配列の数と同じか？チェック
+    if filterSelectNumber == filterArray.count {
+      // 同じ場合は最後まで選択されたので先頭に戻す
+      filterSelectNumber = 0
+    }
     
     // もともとの画像の回転角度を取得
     let rotate = originalImage!.imageOrientation
@@ -80,4 +89,18 @@ class EffectViewController: UIViewController {
   @IBAction func closeButtonAction(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
+  let  filterArray = [ "CIPhotoEffectMono",
+                       "CIPhotoEffectChrome",
+                       "CIPhotoEffectFade",
+                       "CIPhotoEffectInstant",
+                       "CIPhotoEffectNoir",
+                       "CIPhotoEffectProcess",
+                       "CIPhotoEffectTonal",
+                       "CIPhotoEffectTransfer",
+                       "CISepiaTone"]
+  // 選択中のエフェクト添字
+  var filterSelectNumber = 0
+		
+  
+  
 }
